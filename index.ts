@@ -1,20 +1,30 @@
 import { WebSocketServer } from "ws";
 import { httpServer } from "./src/server";
 import dotenv from "dotenv";
-
+import initializeSocketEvent from "./src/app/initializeSocketEvent";
+import UserSocketStore from "./src/interfaces/ws/services/UserSocketStore";
+import SocketService from "./src/interfaces/ws/services/Socket";
+import { logger } from "./src/utils/logger";
+import { COLORS } from "./src/constants/logger";
 dotenv.config();
 
 const HTTP_PORT = Number(process.env.HTTP_PORT) || 8181;
 const WS_PORT = Number(process.env.WS_PORT) || 3000;
 
-console.log(`Start static http server on the ${HTTP_PORT} port!`);
+logger("Start static http server on the 8181 port!", COLORS.magenta);
 httpServer.listen(HTTP_PORT, () => {
-  console.log(`Server is running on http://localhost:${HTTP_PORT}`);
+  logger(`Server is running on http://localhost:${HTTP_PORT}`, COLORS.magenta);
 });
 
-console.log(`Start WS server on the ${WS_PORT} port!`);
+logger(`Start WS server on the ${WS_PORT} port!`, COLORS.magenta);
 const wsServer = new WebSocketServer({ port: WS_PORT });
+initializeSocketEvent();
+
+const userSocketStore = new UserSocketStore();
+const socketService = new SocketService();
 
 wsServer.on("connection", (socket) => {
-  console.log("New connection");
+  socket.on("message", (message) => {
+    socketService.handle(message, socket);
+  });
 });
