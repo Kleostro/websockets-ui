@@ -4,12 +4,15 @@ import RegHandler from "../handlers/RegHandler";
 import WebSocket, { RawData } from "ws";
 import { logger } from "../../../utils/logger";
 import { COLORS } from "../../../constants/logger";
+import CreateRoomHandler from "../handlers/CreateRoomHandler";
 
 class SocketService {
-  private handlers: { [key in WSMessageType]: BaseHandler };
+  private handlers: { [key in WSMessageType]: BaseHandler | null };
   constructor() {
     this.handlers = {
       [WS_MESSAGE_TYPE.REG]: new RegHandler(),
+      [WS_MESSAGE_TYPE.CREATE_ROOM]: new CreateRoomHandler(),
+      [WS_MESSAGE_TYPE.UPDATE_ROOM]: null,
     };
   }
 

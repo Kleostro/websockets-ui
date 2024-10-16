@@ -6,6 +6,8 @@ import UserSocketStore from "./src/interfaces/ws/services/UserSocketStore";
 import SocketService from "./src/interfaces/ws/services/Socket";
 import { logger } from "./src/utils/logger";
 import { COLORS } from "./src/constants/logger";
+import UserService from "./src/app/services/UserService";
+import RoomService from "./src/app/services/RoomService";
 dotenv.config();
 
 const HTTP_PORT = Number(process.env.HTTP_PORT) || 8181;
@@ -21,6 +23,8 @@ const wsServer = new WebSocketServer({ port: WS_PORT });
 initializeSocketEvent();
 
 const userSocketStore = new UserSocketStore();
+const userService = new UserService();
+const roomService = new RoomService();
 const socketService = new SocketService();
 
 wsServer.on("connection", (socket) => {

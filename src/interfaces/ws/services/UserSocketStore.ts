@@ -23,6 +23,12 @@ class UserSocketStore {
     return this.userSockets.get(name);
   }
 
+  getUserIdBySocket(socket: WebSocket) {
+    return Array.from(this.userSockets.entries()).find(
+      ([_, s]) => s === socket
+    )?.[0];
+  }
+
   delete(name: string) {
     this.userSockets.delete(name);
   }
@@ -33,6 +39,10 @@ class UserSocketStore {
 
   getKeys() {
     return Array.from(this.userSockets.keys());
+  }
+
+  getSockets() {
+    return Array.from(this.userSockets.values());
   }
 }
 
