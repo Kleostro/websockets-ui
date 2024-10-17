@@ -8,6 +8,7 @@ import { COLORS } from "../../../constants/logger";
 import UserSocketStore from "../services/UserSocketStore";
 import User from "../../../models/User";
 import RoomService from "../../../app/services/RoomService";
+import WinnerService from "../../../app/services/WinnerService";
 
 class RegHandler extends BaseHandler {
   private userSocketStore = UserSocketStore.getInstance();
@@ -26,6 +27,7 @@ class RegHandler extends BaseHandler {
 
     if (user instanceof User) {
       this.userSocketStore.set(user.id, socket);
+      WinnerService.getInstance().addWinner(user);
     }
 
     SocketEventFactory.emit(data.type).for(socket).withPayload(user).emit();
@@ -37,6 +39,16 @@ class RegHandler extends BaseHandler {
       .for(socket)
       .withPayload(availableRooms)
       .emit();
+
+    const winners = WinnerService.getInstance().getWinners();
+    const allSockets = UserSocketStore.getInstance().getSockets();
+
+    allSockets.forEach((socket) => {
+      SocketEventFactory.emit(WS_MESSAGE_TYPE.UPDATE_WINNERS)
+        .for(socket)
+        .withPayload(winners)
+        .emit();
+    });
   }
 }
 

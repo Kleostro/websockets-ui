@@ -33,8 +33,6 @@ class AddShipHandler extends BaseHandler {
 
       Object.keys(game.players).forEach((playerId) => {
         const playerSocket = UserSocketStore.getInstance().get(playerId);
-        console.log(`Starting game for player: ${playerId}`);
-        console.log(`Starting player: ${startingPlayer}`);
         if (playerSocket) {
           SocketEventFactory.emit(WS_MESSAGE_TYPE.START_GAME)
             .for(playerSocket)

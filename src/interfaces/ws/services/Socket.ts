@@ -7,6 +7,8 @@ import { COLORS } from "../../../constants/logger";
 import CreateRoomHandler from "../handlers/CreateRoomHandler";
 import AddUserToRoomHandler from "../handlers/AddUserToRoomHandler";
 import AddShipHandler from "../handlers/AddShipHandler";
+import AttackHandler from "../handlers/AttackHandler";
+import RandomAttackHandler from "../handlers/RandomAttackHandler";
 
 class SocketService {
   private handlers: Partial<{ [key in WSMessageType]: BaseHandler }>;
@@ -16,6 +18,8 @@ class SocketService {
       [WS_MESSAGE_TYPE.CREATE_ROOM]: new CreateRoomHandler(),
       [WS_MESSAGE_TYPE.ADD_USER_TO_ROOM]: new AddUserToRoomHandler(),
       [WS_MESSAGE_TYPE.ADD_SHIPS]: new AddShipHandler(),
+      [WS_MESSAGE_TYPE.ATTACK]: new AttackHandler(),
+      [WS_MESSAGE_TYPE.RANDOM_ATTACK]: new RandomAttackHandler(),
     };
   }
 

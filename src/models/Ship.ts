@@ -1,6 +1,6 @@
-import { SHIP_SIZES, ShipSizeType } from "../constants/ship";
+import { ShipSizeType } from "../constants/ship";
 
-interface Position {
+export interface Position {
   x: number;
   y: number;
 }

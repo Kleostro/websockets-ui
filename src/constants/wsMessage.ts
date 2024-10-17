@@ -7,6 +7,10 @@ export const WS_MESSAGE_TYPE = {
   ADD_SHIPS: "add_ships",
   START_GAME: "start_game",
   TURN: "turn",
+  ATTACK: "attack",
+  RANDOM_ATTACK: "randomAttack",
+  FINISH: "finish",
+  UPDATE_WINNERS: "update_winners",
 } as const;
 
 export type WSMessageType =

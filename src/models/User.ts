@@ -10,6 +10,10 @@ class User {
     this.password = password;
     this.wins = 0;
   }
+
+  incrementWins(): void {
+    this.wins++;
+  }
 }
 
 export default User;

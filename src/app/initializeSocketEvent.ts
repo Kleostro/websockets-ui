@@ -6,6 +6,9 @@ import AddUserToRoomEventStrategy from "../interfaces/ws/strategies/AddUserToRoo
 import CreateGameEventStrategy from "../interfaces/ws/strategies/CreateGameEvent";
 import StartGameEventStrategy from "../interfaces/ws/strategies/StartGameEvent";
 import TurnEventStrategy from "../interfaces/ws/strategies/TurnEvent";
+import AttackEventStrategy from "../interfaces/ws/strategies/AttackEventStrategy";
+import FinishEventStrategy from "../interfaces/ws/strategies/FinishEvent";
+import UpdateWinnersEventStrategy from "../interfaces/ws/strategies/UpdateWinnersEvent";
 
 const initializeSocketEvent = () => {
   SocketEventFactory.registerStrategy(
@@ -36,6 +39,21 @@ const initializeSocketEvent = () => {
   SocketEventFactory.registerStrategy(
     WS_MESSAGE_TYPE.TURN,
     new TurnEventStrategy()
+  );
+
+  SocketEventFactory.registerStrategy(
+    WS_MESSAGE_TYPE.ATTACK,
+    new AttackEventStrategy()
+  );
+
+  SocketEventFactory.registerStrategy(
+    WS_MESSAGE_TYPE.FINISH,
+    new FinishEventStrategy()
+  );
+
+  SocketEventFactory.registerStrategy(
+    WS_MESSAGE_TYPE.UPDATE_WINNERS,
+    new UpdateWinnersEventStrategy()
   );
 };
 
