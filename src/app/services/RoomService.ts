@@ -27,21 +27,20 @@ class RoomService {
     return this.rooms.get(id);
   }
 
-  public getAvailableRooms(): Room[] {
+  private updateAvailableRooms(): Room[] {
     return Array.from(this.rooms.values()).filter((room) => !room.isFull());
   }
 
-  public updateAvailableRooms() {
-    const freeRooms = this.getAvailableRooms();
-    const availableRooms: { roomId: string; roomUsers: User[] }[] = [];
-    freeRooms.forEach((room) => {
-      availableRooms.push({
+  public getAvailableRooms() {
+    const result: { roomId: string; roomUsers: User[] }[] = [];
+    this.updateAvailableRooms().forEach((room) => {
+      result.push({
         roomId: room.id,
         roomUsers: room.players,
       });
     });
 
-    return availableRooms;
+    return result;
   }
 }
 

@@ -21,14 +21,12 @@ class CreateRoomHandler extends BaseHandler {
     const user = UserService.getInstance().getUser(userId!);
 
     const room = RoomService.getInstance().createRoom();
-
     logger(`Room created: ${room.id}`, COLORS.green);
-    room.addPlayer(user!);
 
+    room.addPlayer(user!);
     logger(`User ${user!.id} added to room ${room.id}`, COLORS.green);
 
-    const availableRooms = RoomService.getInstance().updateAvailableRooms();
-
+    const availableRooms = RoomService.getInstance().getAvailableRooms();
     logger(`Count of available rooms: ${availableRooms.length}`, COLORS.green);
 
     const allSockets = this.userSocketStore.getSockets();

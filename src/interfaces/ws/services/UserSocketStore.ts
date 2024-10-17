@@ -15,12 +15,12 @@ class UserSocketStore {
     return UserSocketStore.userSocketStore;
   }
 
-  set(name: string, socket: WebSocket) {
-    this.userSockets.set(name, socket);
+  set(id: string, socket: WebSocket) {
+    this.userSockets.set(id, socket);
   }
 
-  get(name: string) {
-    return this.userSockets.get(name);
+  get(id: string) {
+    return this.userSockets.get(id);
   }
 
   getUserIdBySocket(socket: WebSocket) {
@@ -29,12 +29,12 @@ class UserSocketStore {
     )?.[0];
   }
 
-  delete(name: string) {
-    this.userSockets.delete(name);
+  delete(id: string) {
+    this.userSockets.delete(id);
   }
 
-  has(name: string) {
-    return this.userSockets.has(name);
+  has(id: string) {
+    return this.userSockets.has(id);
   }
 
   getKeys() {

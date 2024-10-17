@@ -30,7 +30,7 @@ class RegHandler extends BaseHandler {
 
     SocketEventFactory.emit(data.type).for(socket).withPayload(user).emit();
 
-    const availableRooms = RoomService.getInstance().updateAvailableRooms();
+    const availableRooms = RoomService.getInstance().getAvailableRooms();
     logger(`Count of available rooms: ${availableRooms.length}`, COLORS.green);
 
     SocketEventFactory.emit(WS_MESSAGE_TYPE.UPDATE_ROOM)
