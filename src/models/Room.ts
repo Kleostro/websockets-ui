@@ -10,7 +10,10 @@ class Room {
   }
 
   addPlayer(player: User) {
-    if (this.players.length < 2) {
+    if (
+      this.players.length < 2 &&
+      !this.players.some((p) => p.id === player.id)
+    ) {
       this.players.push(player);
     }
   }
