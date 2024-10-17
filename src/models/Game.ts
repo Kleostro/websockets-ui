@@ -30,6 +30,10 @@ class Game {
       .fill(null)
       .map(() => Array(10).fill("empty"));
   }
+
+  addShip(playerId: string, ship: Ship) {
+    this.ships[playerId].push(ship);
+  }
 }
 
 export default Game;

@@ -21,6 +21,10 @@ class GameService {
     this.games.push(game);
     return game;
   }
+
+  public getGame(id: string): Game | undefined {
+    return this.games.find((game) => game.id === id);
+  }
 }
 
 export default GameService;

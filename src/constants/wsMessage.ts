@@ -4,6 +4,7 @@ export const WS_MESSAGE_TYPE = {
   UPDATE_ROOM: "update_room",
   ADD_USER_TO_ROOM: "add_user_to_room",
   CREATE_GAME: "create_game",
+  ADD_SHIPS: "add_ships",
 } as const;
 
 export type WSMessageType =
