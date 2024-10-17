@@ -4,6 +4,8 @@ import RegEventStrategy from "../interfaces/ws/strategies/RegEvent";
 import UpdateRoomEventStrategy from "../interfaces/ws/strategies/UpdateRoomEvent";
 import AddUserToRoomEventStrategy from "../interfaces/ws/strategies/AddUserToRoomEvent";
 import CreateGameEventStrategy from "../interfaces/ws/strategies/CreateGameEvent";
+import StartGameEventStrategy from "../interfaces/ws/strategies/StartGameEvent";
+import TurnEventStrategy from "../interfaces/ws/strategies/TurnEvent";
 
 const initializeSocketEvent = () => {
   SocketEventFactory.registerStrategy(
@@ -24,6 +26,16 @@ const initializeSocketEvent = () => {
   SocketEventFactory.registerStrategy(
     WS_MESSAGE_TYPE.CREATE_GAME,
     new CreateGameEventStrategy()
+  );
+
+  SocketEventFactory.registerStrategy(
+    WS_MESSAGE_TYPE.START_GAME,
+    new StartGameEventStrategy()
+  );
+
+  SocketEventFactory.registerStrategy(
+    WS_MESSAGE_TYPE.TURN,
+    new TurnEventStrategy()
   );
 };
 

@@ -6,7 +6,6 @@ import BaseHandler from "./BaseHandler";
 import { logger } from "../../../utils/logger";
 import { COLORS } from "../../../constants/logger";
 import UserSocketStore from "../services/UserSocketStore";
-import User from "../../../models/User";
 import RoomService from "../../../app/services/RoomService";
 import GameService from "../../../app/services/GameService";
 
@@ -24,9 +23,6 @@ class AddUserToRoomHandler extends BaseHandler {
     const userId = UserSocketStore.getInstance().getUserIdBySocket(socket);
     const user = UserService.getInstance().getUser(userId!);
     logger(`Finded user with name: ${user?.name}`, COLORS.green);
-
-    // room?.addPlayer(user!);
-    // logger(`User added to room: ${room?.id}`, COLORS.green);
 
     if (room && user) {
       room.addPlayer(user);
